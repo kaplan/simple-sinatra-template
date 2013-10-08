@@ -1,0 +1,144 @@
+// MOBILE FIRST with mixins, @content and break points variables
+// http://thesassway.com/intermediate/responsive-web-design-in-sass-using-media-queries-in-sass-32
+
+// $break-small: 320px;
+// $break-large: 1024px;
+
+// @mixin respond-to($media) {
+//   @if $media == handhelds {
+//     @media only screen and (max-width: $break-small) { @content; }
+//   }
+//   @else if $media == medium-screens {
+//     @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+//   }
+//   @else if $media == wide-screens {
+//     @media only screen and (min-width: $break-large) { @content; }
+//   }
+// }
+
+// .profile-pic {
+//   float: left;
+//   width: 250px;
+//   @include respond-to(handhelds) { width: 100% ;}
+//   @include respond-to(medium-screens) { width: 125px; }
+//   @include respond-to(wide-screens) { float: none; }
+// }
+
+
+
+$mint:    #97cfbf;
+$copper:  #cf7846;
+$zinc:    #d9dde4;
+
+// 320, 480, 600, 768, 1024, 1200
+
+// 480px;
+$break-smaller: 28.75em;
+
+// 600px
+$break-small-tablet: 37.5em;
+
+// 768px
+$break-tablet: 48em;
+
+// 1024px
+$break-large: 64.0625em;
+
+// 1200px
+$break-largest: 75em;
+
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media screen and (min-width: $break-smaller) { @content; }
+  }
+  @else if $media == med_handhelds {
+    @media screen and (min-width: $break-small-tablet) { @content; }
+  }
+  @else if $media == tablets {
+    @media screen and (min-width: $break-tablet) { @content; }
+  }
+  @else if $media == screens {
+    @media screen and (min-width: $break-large) { @content; }
+  }
+  @else if $media == wide_screens {
+    @media screen and (min-width: $break-largest) { @content; }
+  }
+}
+
+html, body, h1 {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #bbffea;
+  font-size: 1em;
+  text-shadow: 2px 2px 6px #527066;
+  padding-left: 20px;
+}
+
+.adaptive-display-info {
+   // width: 300px;
+   // border: solid 1px white;
+   color:#b5f8e3;
+   padding: 20px;
+
+}
+
+.adaptive-display-info:after {
+   content: "mobile base";
+}
+
+body {
+
+  @include respond-to(handhelds) {
+    background-color: #97cfbf;
+    .adaptive-display-info:after {
+       content: "handhelds";
+    }
+    h1 {
+      font-size: 2em;
+    }
+  }
+
+  @include respond-to(med_handhelds) {
+    background-color: #77a496;
+    .adaptive-display-info:after {
+       content: "med_handhelds";
+    }
+  }
+
+  @include respond-to(tablets) {
+    background-color: #618479;
+    .adaptive-display-info:after {
+       content: "tablets";
+    }
+    h1 {
+      font-size: 3em;
+    }
+  }
+
+  @include respond-to(screens) {
+    background-color: #4b675f;
+    .adaptive-display-info:after {
+       content: "screens";
+    }
+    h1 {
+      font-size: 4em;
+    }
+  }
+
+  @include respond-to(wide_screens) {
+    background-color: $zinc; // #3e554e;
+    .adaptive-display-info:after {
+       content: "wide_screens";
+    }
+    h1 {
+      color: #3d3e40;
+      font-size: 5em;
+    }
+  }
+}
+
+
